@@ -5,6 +5,16 @@ phases:
         python: 3.7
   build:
     commands:
+      - wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+      - sha256sum Anaconda3-2019.03-Linux-x86_64.sh
+      - bash Anaconda3-2019.03-Linux-x86_64.sh -b
+      - sudo apt update
+      - sudo apt install git
+      - git clone https://github.com/abilabs/demo_alpha.git
+      - cd demo_alpha/
+      - conda env create -f environment.yml --yes
+      - source postBuild
+      - source activate reproduce-chexnet
       - cd /root
       - mkdir -p mxnet/python pillow/python keras/python scipy/python gluoncv/python gluonnlp/python xgboost/python sklearn/python numpy/python
       - python3 -m pip install --user pip --upgrade
